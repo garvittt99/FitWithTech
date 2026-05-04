@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FitWithTech Live Movement Tracker</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-bg" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="#tracker" aria-label="FitWithTech live tracker">
+        <span class="brand-mark">FT</span>
+        <span>FitWithTech</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#tracker">Live Tracker</a>
+        <a href="#metrics">Metrics</a>
+        <a href="#movements">Movements</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="tracker-shell" id="tracker" aria-label="Live workout movement tracker">
+        <div class="camera-panel reveal">
+          <div class="camera-topline">
+            <div>
+              <p class="eyebrow">Camera movement tracking</p>
+              <h1>Track your live workout movements.</h1>
+            </div>
+            <span class="status-pill" id="cameraStatus">Camera off</span>
+          </div>
+
+          <div class="video-stage" id="videoStage">
+            <video id="video" playsinline muted></video>
+            <canvas id="overlayCanvas"></canvas>
+            <div class="idle-state" id="idleState">
+              <div>
+                <span>Ready to track</span>
+                <strong>Start camera and stand fully in frame.</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="camera-actions" aria-label="Camera and tracking controls">
+            <button class="primary-btn" type="button" id="startCameraBtn">
+              <span class="btn-icon" aria-hidden="true">Cam</span>
+              Start camera
+            </button>
+            <button class="control-btn" type="button" id="startTrackingBtn">
+              <span class="btn-icon" aria-hidden="true">Play</span>
+              Start tracking
+            </button>
+            <button class="control-btn" type="button" id="pauseTrackingBtn">
+              <span class="btn-icon" aria-hidden="true">Pause</span>
+              Pause
+            </button>
+            <button class="danger-btn" type="button" id="stopCameraBtn">
+              <span class="btn-icon" aria-hidden="true">Off</span>
+              Camera off
+            </button>
+            <button class="control-btn" type="button" id="resetBtn">
+              <span class="btn-icon" aria-hidden="true">Reset</span>
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <aside class="coach-panel reveal" id="metrics" aria-label="Live movement metrics">
+          <div class="panel-title">
+            <div>
+              <p class="eyebrow">AI coach mode</p>
+              <h2 id="activeExerciseTitle">Squat Tracker</h2>
+            </div>
+            <span class="mode-chip" id="engineStatus">Motion engine</span>
+          </div>
+
+          <label class="mode-select">
+            <span>Track movement</span>
+            <select id="exerciseSelect"></select>
+          </label>
+
+          <div class="metric-grid">
+            <div class="metric-card primary-metric">
+              <span id="repLabel">Reps</span>
+              <strong id="repCount">0</strong>
+            </div>
+            <div class="metric-card">
+              <span>Form score</span>
+              <strong id="formScore">--</strong>
+            </div>
+            <div class="metric-card">
+              <span>Motion</span>
+              <strong id="motionScore">0%</strong>
+            </div>
+            <div class="metric-card">
+              <span>Active time</span>
+              <strong id="activeTime">00:00</strong>
+            </div>
+          </div>
+
+          <div class="coach-cue">
+            <span>Live cue</span>
+            <strong id="coachCue">Start the camera, then move through one clean rep.</strong>
+          </div>
+
+          <div class="movement-bars" aria-label="Movement balance">
+            <div>
+              <span>Left</span>
+              <meter id="leftMotion" min="0" max="100" value="0"></meter>
+            </div>
+            <div>
+              <span>Center</span>
+              <meter id="centerMotion" min="0" max="100" value="0"></meter>
+            </div>
+            <div>
+              <span>Right</span>
+              <meter id="rightMotion" min="0" max="100" value="0"></meter>
+            </div>
+          </div>
+
+          <div class="privacy-note">
+            Video stays in this browser tab. The app reads camera frames locally for movement feedback.
+          </div>
+        </aside>
+      </section>
+
+      <section class="movement-section" id="movements" aria-label="Trackable home movements">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Trackable home movements</p>
+          <h2>Pick from 8 live movement modes</h2>
+        </div>
+        <div class="movement-grid" id="movementGrid"></div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
